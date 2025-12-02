@@ -1,0 +1,16 @@
+# EDAD Spec (canonical)
+- Purpose & overview (link to whitepaper)
+- Actors: Locker (BTC depositor), Redeemer, Protocol
+- Assets & tokens: WBTC (initial RA), DMD (ERC20)
+- Contracts and interfaces:
+  - ReserveVault (depositWBTC, withdrawWBTC, position record)
+  - EmissionContract (yearlyPool, distribute)
+  - DMDToken (mint, burn)
+  - RedemptionEngine (burnAndWithdraw)
+  - SupplyRegistry (track totalMinted, totalBurned)
+  - WeightingModule (computeWeight)
+- Emission law: year1 = 3,600,000; year_n = year_{n-1} * 0.75; cap=14,400,000
+- Weight formula: weight = btc_amount * weightMultiplier (1 + 0.02*months capped at 24 months ->1.48x)
+- UX flows: deposit, lock, mint accrual, redemption (burn), unlocking
+- Security assumptions and threat model
+- Upgrade policy: which contracts are immutable, which have timelock/multisig
